@@ -12,8 +12,6 @@
       {{ 'nopass' if not _easyrsa__cert.pass | default(None) else '' }}
   args:
     creates: "{{ easyrsa_pki_dir }}/issued/{{ _easyrsa__cert.name }}.crt"
-  environment:
-    EASYRSA_REQ_CN: "{{ _easyrsa__cert.cn | d(_easyrsa__cert.name, true) }}"
   loop: "{{ easyrsa_servers + easyrsa_clients }}"
   loop_control:
     loop_var: _easyrsa__cert
